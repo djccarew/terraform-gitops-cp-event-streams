@@ -1,4 +1,4 @@
-name: gitops-cp-event-streams-instance
+name: gitops-cp-event-streams
 type: gitops
 description: >-
   Module to populate a gitops repo with the resources to provision
@@ -30,11 +30,10 @@ versions:
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-namespace.git
             version: '>= 1.0.0'
-      - id: eventstreams
+      - id: operator
         refs:
-          - source: github.com/cloud-native-toolkit/terraform-gitops-cp-event-streams.git
+          - source: github.com/cloud-native-toolkit/terraform-gitops-cp-event-streams-operator.git
             version: ">= 1.0.0"
-
     variables:
       - name: gitops_config
         moduleRef:
@@ -63,4 +62,4 @@ versions:
       - name: license_use
         moduleRef:
           id: dep-manager
-          output: eventstreams.license_use
+          output: operator.license_use

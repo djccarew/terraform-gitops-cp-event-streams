@@ -17,27 +17,28 @@ locals {
        tls  = false
      }
   ]
-  kafka_listeners_secure = [
-    {
-      name = "external"
-      port = 9094
-      type = "route"
-      tls  = true
-      authentication = {
-        type = "scram-sha-512"
-      }
-    },
-    {
-      name = "tls"
-      port = 9093
-      type = "internal"
-      tls  = true
-      authentication = {
-        type = "tls"
-      }
-    }
-  ]
-  kafka_listeners_locals = var.kafka_listener_type == "secure" ? local.kafka_listeners_secure : local.kafka_listeners_insecure
+  # djc default to insecure
+  #kafka_listeners_secure = [
+  #     {
+  #     name = "tls"
+  #     port = 9093
+  #     type = "internal"
+  #     tls  = true
+  #     authentication = {
+  #        type = "tls"
+  #     }
+  #  },
+  #  {
+  #     name = "external"
+  #     port = 9094
+  #     type = "route"
+  #     tls  = true
+  #     authentication = {
+  #        type = "scram-sha-512"
+  #     }
+  #  }
+  #]
+  #kafka_listeners_locals = var.kafka_listener_type == "secure" ? local.kafka_listeners_secure : local.kafka_listeners_insecure
   values_content = {
     apiVersion = var.es_apiVersion
     name       = var.service_name
@@ -72,7 +73,7 @@ locals {
         memory = var.memorylimits
       }
     }
-    listeners = local.kafka_listeners_locals
+    listeners = local.kafka_listeners_insecure
   }
 }
 

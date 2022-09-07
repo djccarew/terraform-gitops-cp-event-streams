@@ -202,8 +202,8 @@ variable "kafka_log_message_format_version" {
   default     = "3.2"
 }
 
-variable "kafka_listeners" {
-  type        = list
-  description = "Kafka listerners defaults to secure - override to provide light-insecure"
-  default     = []
+variable "kafka_listener_type" {
+  type        = string
+  description = "Kafka listeners defaults to insecure - override to provide secure"
+  default     = "insecure"
 }
